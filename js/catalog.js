@@ -5,7 +5,6 @@
 // Set up an empty cart for use on this page.
 const cart = new Cart( [] );
 
-
 // On screen load, we call this method to put all of the busmall options
 // (the things in the Product.allProducts array) into the drop down list.
 function populateForm() {
@@ -18,7 +17,6 @@ function populateForm() {
     optionTag.innerHTML = Product.allProducts[i].name;
     selectElement.appendChild( optionTag );
   }
-
 }
 
 // When someone submits the form, we need to add the selected item to the cart
@@ -51,28 +49,20 @@ function addSelectedItemToCart( event ) {
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
 function updateCounter() {
-  document.getElementById( 'itemCount' ).innerHTML = cart.items.lenghth;
+  document.getElementById( 'itemCount' ).innerHTML = ` (${cart.items.length})`;
 }
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
-
 function updateCartPreview() {
   // TODO: Get the item and quantity from the form
   let optionValue = document.getElementById( 'items' ).value;
-
   let optionQty = document.getElementById( 'quantity' ).value ;
 
-
   // TODO: Add a new element to the cartContents div with that information
-
   let cartList = document.getElementById( 'cartContents' );
   let listItem = document.createElement( 'p' );
   cartList.appendChild( listItem );
-
   listItem.textContent = `${optionQty}: ${optionValue}`;
-
-
-
 }
 
 // Set up the "submit" event listener on the form.
