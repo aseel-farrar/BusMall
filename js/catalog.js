@@ -5,6 +5,7 @@
 // Set up an empty cart for use on this page.
 const cart = new Cart( [] );
 
+
 // On screen load, we call this method to put all of the busmall options
 // (the things in the Product.allProducts array) into the drop down list.
 function populateForm() {
@@ -12,7 +13,10 @@ function populateForm() {
   //TODO: Add an <option> tag inside the form's select for each product
   const selectElement = document.getElementById( 'items' );
   for ( let i in Product.allProducts ) {
-
+    let optionTag = document.createElement( 'option' );
+    optionTag.value = Product.allProducts[i].name;
+    optionTag.innerHTML = Product.allProducts[i].name;
+    selectElement.appendChild( optionTag );
   }
 
 }
@@ -23,14 +27,17 @@ function populateForm() {
 function handleSubmit( event ) {
 
   // TODO: Prevent the page from reloading
+  event.preventDefault();
 
   // Do all the things ...
-  addSelectedItemToCart();
+  addSelectedItemToCart( event );
   cart.saveToLocalStorage();
   updateCounter();
   updateCartPreview();
 
 }
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart( event ) {
@@ -51,13 +58,20 @@ function updateCounter() {
 
 function updateCartPreview() {
   // TODO: Get the item and quantity from the form
-  const fromLocalStorage = JSON.parse( localStorage.getItem( cart ) );
+  let optionValue = document.getElementById( 'items' ).value;
+
+  let optionQty = document.getElementById( 'quantity' ).value ;
+
+
   // TODO: Add a new element to the cartContents div with that information
+
   let cartList = document.getElementById( 'cartContents' );
   let listItem = document.createElement( 'p' );
   cartList.appendChild( listItem );
-  // listItem.textContent = `${fromLocalStorage.product}, Qty: ${fromLocalStorage.quantity}:`;
-  listItem.textContent = `${Cart.items[0].product}, Qty: ${Cart.items[0].quantity}:`;
+
+  listItem.textContent = `${optionQty}: ${optionValue}`;
+
+
 
 }
 
