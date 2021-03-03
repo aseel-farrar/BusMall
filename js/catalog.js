@@ -51,14 +51,13 @@ function updateCounter() {
 
 function updateCartPreview() {
   // TODO: Get the item and quantity from the form
-  const fromLocalStorage = JSON.parse( localStorage.getItem( cart ) );
+  const qtyOrderd = event.target.quantity.value;
+
   // TODO: Add a new element to the cartContents div with that information
   let cartList = document.getElementById( 'cartContents' );
   let listItem = document.createElement( 'p' );
   cartList.appendChild( listItem );
-  // listItem.textContent = `${fromLocalStorage.product}, Qty: ${fromLocalStorage.quantity}:`;
-  listItem.textContent = `${Cart.items[0].product}, Qty: ${Cart.items[0].quantity}:`;
-
+  listItem.textContent = `${selectedItem}, Qty: ${orderedQty}:`;
 }
 
 // Set up the "submit" event listener on the form.
