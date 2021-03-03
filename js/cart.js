@@ -2,13 +2,14 @@
 'use strict';
 
 // Create an event listener so that when the delete link is clicked, the removeItemFromCart method is invoked.
-const table = document.getElementById('cart');
-table.addEventListener('click', removeItemFromCart);
+const table = document.getElementById( 'cart' );
+table.addEventListener( 'click', removeItemFromCart );
 let cart;
 
 function loadCart() {
-  const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-  cart = new Cart(cartItems);
+  const cartItems = JSON.parse( localStorage.getItem( 'cart' ) ) || [];
+  cart = new Cart( cartItems );
+  // console.log(Cart.items);
 }
 
 // Make magic happen --- re-pull the Cart, clear out the screen and re-draw it
@@ -19,7 +20,8 @@ function renderCart() {
 }
 
 // TODO: Remove all of the rows (tr) in the cart table (tbody)
-function clearCart() {}
+function clearCart() { }
+table.innerHTML = '';
 
 // TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
 function showCart() {
@@ -31,9 +33,26 @@ function showCart() {
   // TODO: Create a TD for the delete link, quantity,  and the item
   // TODO: Add the TR to the TBODY and each of the TD's to the TR
 
+  for ( let i = 0; i < cart.items.length; i++ ) {
+    const trElement = document.createElement( 'tr' );
+    table.appendChild( trElement );
+    const cellElement = document.createElement( 'td' );
+    trElement.appendChild( cellElement );
+    const cellElement1 = document.createElement( 'a' );
+    cellElement1.id = cart.items[i].product;
+    cellElement.appendChild( cellElement1 );
+    cellElement1.textContent = 'X';
+    const cellElement3 = document.createElement( 'td' );
+    trElement.appendChild( cellElement3 );
+    cellElement3.textContent = cart.items[i].quantity;
+    const cellElement2 = document.createElement( 'td' );
+    trElement.appendChild( cellElement2 );
+    cellElement2.textContent = cart.items[i].product;
+
+  }
 }
 
-function removeItemFromCart(event) {
+function removeItemFromCart( event ) {
 
   // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
   // TODO: Save the cart back to local storage
